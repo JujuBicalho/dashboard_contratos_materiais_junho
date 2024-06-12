@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 import plotly.express as px
 
 # Carregar o arquivo Excel
-file_path = 'path_to_your_excel_file.xlsx'  # Altere para o caminho correto do seu arquivo
+file_path = 'c:\Users\jbittenb\OneDrive - NTT DATA EMEAL\Escritorio\NTT\ENEL\documentos\Contratos\BASE BI CONTRATOS.xlsx'  # Altere para o caminho correto do seu arquivo
 xls = pd.ExcelFile(file_path)
 
 # Carregar as abas relevantes
