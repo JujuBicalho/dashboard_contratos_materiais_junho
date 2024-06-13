@@ -1,10 +1,13 @@
 import streamlit as st
+import dash
+from dash import dcc, html
+import dash_bootstrap_components as dbc
 import pandas as pd
 from datetime import datetime, timedelta
 import plotly.express as px
 
 # Carregar o arquivo Excel
-file_path = 'BASE BI CONTRATOS.xlsx'  # Altere para o caminho correto do seu arquivo
+file_path = r'c:\Users\jbittenb\OneDrive - NTT DATA EMEAL\Escritorio\NTT\ENEL\documentos\Contratos\BASE BI CONTRATOS.xlsx'
 xls = pd.ExcelFile(file_path)
 
 # Carregar as abas relevantes
@@ -80,81 +83,131 @@ analise_descritiva = {
     "Materiais Sem Contrato": materiais_sem_contrato
 }
 
+# Criar DataFrame para o gráfico
+data_consumo = pd.DataFrame({
+    'Consumo': ["Abaixo de 60%", "Entre 60% e 80%", "Acima de 80%"],
+    'Quantidade': [contratos_abaixo_60, contratos_acima_60, contratos_acima_80]
+})
+
 # Gráfico de barras para mostrar os consumos
 fig_consumo = px.bar(
-    x=["Abaixo de 60%", "Entre 60% e 80%", "Acima de 80%"],
-    y=[contratos_abaixo_60, contratos_acima_60, contratos_acima_80],
+    data_consumo,
+    x='Consumo',
+    y='Quantidade',
     title='Consumo',
-    labels={'x': 'Consumo', 'y': 'Quantidade'},
-    color=["Consumo Abaixo de 60%", "Consumo Acima de 60%", "Consumo Acima de 80%"],
+    color='Consumo',
     color_discrete_map={
-        "Consumo Abaixo de 60%": "green",
-        "Consumo Acima de 60%": "orange",
-        "Consumo Acima de 80%": "red"
+        "Abaixo de 60%": "green",
+        "Entre 60% e 80%": "orange",
+        "Acima de 80%": "red"
     }
 )
-fig_consumo.update_traces(texttemplate='%{y}', textposition='inside', insidetextanchor='middle', textfont=dict(color='white', size=25, family='Arial', weight='bold'))
-fig_consumo.update_layout(showlegend=False, xaxis_title=None, yaxis_title=None, plot_bgcolor='#DCDCDC', paper_bgcolor='white', title_font=dict(size=30, family='Arial', color='#005a8d', weight='bold'), title_x=0.5)
-fig_consumo.update_layout(xaxis=dict(tickfont=dict(size=14, weight='bold')))
 
-# Layout do aplicativo Streamlit
-st.set_page_config(layout="wide")
+fig_consumo.update_traces(
+    texttemplate='%{y}', 
+    textposition='inside', 
+    insidetextanchor='middle', 
+    textfont=dict(color='white', size=15, family='Arial', weight='bold'),
+    hovertemplate='<b>Consumo</b>: %{x}<br><b>Quantidade</b>: %{y}<extra></extra>'  
+) 
+   
+fig_consumo.update_layout(
+    showlegend=False, 
+    xaxis_title=None, 
+    yaxis_title=None, 
+    plot_bgcolor='white', 
+    paper_bgcolor='white', 
+    title_font=dict(size=30, family='Arial', color='#005a8d', weight='bold'),
+    title_x=0.5,
+    xaxis=dict(tickfont=dict(size=15, family='Arial', color='black', weight='bold'))
+)
 
-st.markdown("""
-    <style>
-    .stApp {
-        background-color: white;
-    }
-    .big-font {
-        font-size:30px !important;
-    }
-    .card-title {
-        font-size: 20px;
-    }
-    .card-text {
-        font-size: 28px;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+fig_consumo.update_xaxes(
+    tickfont=dict(size=13, family='Arial', color='black', weight='bold')
+)
 
-st.title('Análise Descritiva de Junho - Contratos Materiais')
+# Layout do aplicativo Dash
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-st.markdown("""
-    <style>
-    .stMarkdown h1 {
-        background-color: #f0f8ff;
-        padding: 20px;
-        border-radius: 10px;
-        text-align: center;
-        color: #005a8d;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+app.layout = dbc.Container([
+    html.Div([
+        html.H1("Análise Descritiva Contratos de Materiais -", style={'textAlign': 'center', 'color': '#005a8d', 'backgroundColor': '#F0F8FF', 'padding': '20px', 'border-radius': '10px'}),
+    ], style={'marginBottom': '40px'}),
+    
+    dbc.Row([
+        dbc.Col([
+            dbc.Card([
+                dbc.CardBody([
+                    html.H5("Total de Contratos", className="card-title", style={'textAlign': 'center'}),
+                    html.H2(f"{analise_descritiva['Total de Contratos']}", className="card-text", style={'textAlign': 'center'}),
+                ], style={'textAlign': 'center'}),
+            ], color="info", inverse=True, style={'border-radius': '50px', 'height': '100%'}),
+        ], width=3),
+        
+        dbc.Col([
+            dbc.Card([
+                dbc.CardBody([
+                    html.H5(["Prox. Vencimento (6 meses)"], className="card-title", style={'textAlign': 'center', 'color': 'red'}),
+                    html.H2(f"{analise_descritiva['Contratos Prox. Vencimento']}", className="card-text", style={'textAlign': 'center', 'color': 'red'}),
+                ], style={'textAlign': 'center'}),
+            ], color="info", inverse=True, style={'border-radius': '15px'}),
+        ], width=3),      
+        
+        
+        dbc.Col([
+            dbc.Card([
+                dbc.CardBody([
+                    html.H5("Valor dos Contratos (Bi)", className="card-title", style={'textAlign': 'center'}),
+                    html.H2(f"{analise_descritiva['Valor Total dos Contratos (Bi)']:.3f}", className="card-text", style={'textAlign': 'center'}),
+                ], style={'textAlign': 'center'}),
+            ], color="info", inverse=True, style={'border-radius': '15px'}),
+        ], width=3),
+    ], justify='center', className="mb-4"),
+    
+    dbc.Row([
+        dbc.Col([
+            dbc.Card([
+                dbc.CardBody([
+                    html.H5("Valor Global Pendente (Bi)", className="card-title", style={'textAlign': 'center'}),
+                    html.H2(f"{analise_descritiva['Valor Global Pendente (Bi)']:.3f}", className="card-text", style={'textAlign': 'center'}),
+                ], style={'textAlign': 'center'}),
+            ], color="info", inverse=True, style={'border-radius': '15px', 'height': '100%'}),
+        ], width=3),
+        
+        dbc.Col([
+            dbc.Card([
+                dbc.CardBody([
+                    html.H5("Com Consumo Mínimo", className="card-title", style={'textAlign': 'center'}),
+                    html.H2(f"{analise_descritiva['Contratos com Consumo Mínimo']}", className="card-text", style={'textAlign': 'center'}),
+                ], style={'textAlign': 'center'}),
+            ], color="info", inverse=True, style={'border-radius': '15px'}),
+        ], width=3),
+        
+        dbc.Col([
+            dbc.Card([
+                dbc.CardBody([
+                    html.H5("Consumo Mínimo Atingido", className="card-title", style={'textAlign': 'center'}),
+                    html.H2(f"{analise_descritiva['Consumo Mínimo Atingido']}", className="card-text", style={'textAlign': 'center'}),
+                ], style={'textAlign': 'center'}),
+            ], color="info", inverse=True, style={'border-radius': '15px'}),
+        ], width=3),
+        
+        dbc.Col([
+            dbc.Card([
+                dbc.CardBody([
+                    html.H5("Materiais Sem Contrato", className="card-title", style={'textAlign': 'center'}),
+                    html.H2(f"{analise_descritiva['Materiais Sem Contrato']}", className="card-text", style={'textAlign': 'center'}),
+                ], style={'textAlign': 'center'}),
+            ], color="info", inverse=True, style={'border-radius': '15px'}),
+        ], width=3),
+    ], justify='center', className="mb-4"),
+    
+    dbc.Row([
+        dbc.Col([
+            dcc.Graph(figure=fig_consumo)
+        ], width=12)
+    ])
+], fluid=True, style={'backgroundColor': 'white'})
 
-# Cartões
-col1, col2, col3 = st.columns(3)
-col4, col5, col6 = st.columns(3)
-
-with col1:
-    st.markdown(f"<div class='card-title'>Total de Contratos</div><div class='card-text'>{analise_descritiva['Total de Contratos']}</div>", unsafe_allow_html=True)
-
-with col2:
-    st.markdown(f"<div class='card-title'>Prox. Vencimento<br>(6 meses)</div><div class='card-text' style='color:red;'>{analise_descritiva['Contratos Prox. Vencimento']}</div>", unsafe_allow_html=True)
-
-with col3:
-    st.markdown(f"<div class='card-title'>Valor Total dos Contratos (Bi)</div><div class='card-text'>{analise_descritiva['Valor Total dos Contratos (Bi)']:.3f}</div>", unsafe_allow_html=True)
-
-with col4:
-    st.markdown(f"<div class='card-title'>Valor Global Pendente (Bi)</div><div class='card-text'>{analise_descritiva['Valor Global Pendente (Bi)']:.3f}</div>", unsafe_allow_html=True)
-
-with col5:
-    st.markdown(f"<div class='card-title'>Com Consumo Mínimo</div><div class='card-text'>{analise_descritiva['Contratos com Consumo Mínimo']}</div>", unsafe_allow_html=True)
-
-with col6:
-    st.markdown(f"<div class='card-title'>Consumo Mínimo Atingido</div><div class='card-text'>{analise_descritiva['Consumo Mínimo Atingido']}</div>", unsafe_allow_html=True)
-
-# Cartão extra para "Materiais Sem Contrato"
-st.markdown(f"<div class='card-title'>Materiais Sem Contrato</div><div class='card-text'>{analise_descritiva['Materiais Sem Contrato']}</div>", unsafe_allow_html=True)
-
-# Gráfico
-st.plotly_chart(fig_consumo, use_container_width=True)
+if __name__ == '__main__':
+    app.run_server(debug=True)
