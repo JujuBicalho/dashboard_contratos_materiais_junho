@@ -10,7 +10,7 @@ from threading import Thread
 
 # Função para rodar o servidor Dash
 def run_dash():
-    app.run_server(debug=False, use_reloader=False)
+    app.run_server(debug=False, use_reloader=False, dev_tools_props_check=False)
 
 # Carregar o arquivo Excel
 file_path = 'BASE BI CONTRATOS.xlsx'
@@ -137,7 +137,7 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 app.layout = dbc.Container([
     html.Div([
-        html.H1("Análise Descritiva Contratos de Materiais -", style={'textAlign': 'center', 'color': '#005a8d', 'backgroundColor': '#F0F8FF', 'padding': '20px', 'border-radius': '10px'}),
+        html.H1("Análise Descritiva Contratos de Materiais - Junho 2024", style={'textAlign': 'center', 'color': '#005a8d', 'backgroundColor': '#F0F8FF', 'padding': '20px', 'border-radius': '10px'}),
     ], style={'marginBottom': '40px'}),
     
     dbc.Row([
@@ -242,5 +242,4 @@ if __name__ == '__main__':
         """,
         unsafe_allow_html=True
     )
-
 
