@@ -223,7 +223,6 @@ app.layout = dbc.Container([
     ])
 ], fluid=True, style={'backgroundColor': 'white', 'width': '100%'})
 
-# Executar o Streamlit
 if __name__ == '__main__':
     # Rodar o Dash em uma thread separada
     thread = Thread(target=run_dash)
