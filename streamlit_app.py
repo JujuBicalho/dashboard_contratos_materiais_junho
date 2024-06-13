@@ -136,7 +136,7 @@ fig_consumo.update_xaxes(
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 app.layout = dbc.Container([
-       html.Div([
+    html.Div([
         html.H1("Análise Descritiva Contratos de Materiais - Junho 2024", style={
             'textAlign': 'center', 
             'color': '#005a8d', 
@@ -144,7 +144,7 @@ app.layout = dbc.Container([
             'padding': '20px', 
             'border-radius': '10px',
             'width': '100%',
-            'fontSize': '24px'  
+            'fontSize': '24px'  # Ajuste o tamanho da fonte conforme necessário
         }),
     ], style={'marginBottom': '40px', 'width': '100%'}),
     
