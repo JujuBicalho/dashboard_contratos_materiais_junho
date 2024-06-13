@@ -208,7 +208,7 @@ app.layout = dbc.Container([
             dcc.Graph(figure=fig_consumo)
         ], width=12)
     ])
-], fluid=True, style={'backgroundColor': 'white'})
+], fluid=True, style={'backgroundColor': 'white', 'width': '100%'})
 
 # Rodar o aplicativo Dash localmente
 def run_dash():
@@ -225,4 +225,23 @@ if __name__ == '__main__':
     thread.start()
 
     # Mostrar o Dash no Streamlit
-    st.markdown("<iframe src='http://127.0.0.1:8050' width='100%' height='800'></iframe>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <style>
+    .iframe-container {
+        width: 100%;
+        height: 100vh;
+    }
+    .iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+    </style>
+    <div class="iframe-container">
+        <iframe src='http://127.0.0.1:8050' class="iframe"></iframe>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
