@@ -5,6 +5,7 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 from datetime import datetime, timedelta
 import plotly.express as px
+from dash.dependencies import Input, Output
 
 # Carregar o arquivo Excel
 file_path = 'BASE BI CONTRATOS.xlsx'
@@ -209,5 +210,19 @@ app.layout = dbc.Container([
     ])
 ], fluid=True, style={'backgroundColor': 'white'})
 
+# Rodar o aplicativo Dash localmente
+def run_dash():
+    app.run_server(debug=False, use_reloader=False)
+
+# Executar o Streamlit
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    from threading import Thread
+    import os
+
+    # Rodar o Dash em uma thread separada
+    thread = Thread(target=run_dash)
+    thread.daemon = True
+    thread.start()
+
+    # Mostrar o Dash no Streamlit
+    st.markdown("<iframe src='http://127.0.0.1:8050' width='100%' height='800'></iframe>", unsafe_allow_html=True)
