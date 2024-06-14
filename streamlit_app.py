@@ -22,7 +22,7 @@ time.sleep(5)
 #st.title("Dashboard Contrato de Materiais Resumido")
 
 # Mostrar o Dash no Streamlit
-components.iframe("http://127.0.0.1:8055", width=800, height=600, scrolling=False)
+components.iframe("http://127.0.0.1:8055", width=1280, height=768, scrolling=False)
 
 
 
