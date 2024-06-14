@@ -19,7 +19,7 @@ import time
 time.sleep(5)
 
 # Título da página do Streamlit
-st.title("Dashboard Contrato de Materiais Resumido")
+#st.title("Dashboard Contrato de Materiais Resumido")
 
 # Mostrar o Dash no Streamlit
 components.iframe("http://127.0.0.1:8055", width=800, height=600, scrolling=False)
