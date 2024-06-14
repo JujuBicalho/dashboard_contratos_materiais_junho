@@ -140,7 +140,7 @@ app.layout = dbc.Container([
             'width': '100%',
             'fontSize': '24px'  # Ajuste o tamanho da fonte conforme necessário
         }),
-    ], style={'marginBottom': '40px', 'width': '100%', 'display': 'flex', 'justify-content': 'center'}),
+    ], style={'marginBottom': '20px', 'width': '100%', 'display': 'flex', 'justify-content': 'center'}),
     
     dbc.Row([
         dbc.Col([
@@ -149,7 +149,7 @@ app.layout = dbc.Container([
                     html.H5("Total de Contratos", className="card-title", style={'textAlign': 'center'}),
                     html.H2(f"{analise_descritiva['Total de Contratos']}", className="card-text", style={'textAlign': 'center'}),
                 ], style={'textAlign': 'center'}),
-            ], color="info", inverse=True, style={'border-radius': '15px', 'height': '100%'}),
+            ], color="info", inverse=True, style={'border-radius': '15px', 'padding': '10px', 'height': '500%'}),
         ], width=2),
         
         dbc.Col([
@@ -158,9 +158,8 @@ app.layout = dbc.Container([
                     html.H5(["Prox. Vencimento (6 meses)"], className="card-title", style={'textAlign': 'center', 'color': 'red'}),
                     html.H2(f"{analise_descritiva['Contratos Prox. Vencimento']}", className="card-text", style={'textAlign': 'center', 'color': 'red'}),
                 ], style={'textAlign': 'center'}),
-            ], color="info", inverse=True, style={'border-radius': '15px'}),
+            ], color="info", inverse=True, style={'border-radius': '15px', 'padding': '10px', 'height': '100%'}),
         ], width=2),      
-        
         
         dbc.Col([
             dbc.Card([
@@ -168,7 +167,7 @@ app.layout = dbc.Container([
                     html.H5("Valor dos Contratos (Bi)", className="card-title", style={'textAlign': 'center'}),
                     html.H2(f"{analise_descritiva['Valor Total dos Contratos (Bi)']:.3f}", className="card-text", style={'textAlign': 'center'}),
                 ], style={'textAlign': 'center'}),
-            ], color="info", inverse=True, style={'border-radius': '15px'}),
+            ], color="info", inverse=True, style={'border-radius': '15px', 'padding': '10px', 'height': '100%'}),
         ], width=2),
         
         dbc.Col([
@@ -177,7 +176,7 @@ app.layout = dbc.Container([
                     html.H5("Valor Global Pendente (Bi)", className="card-title", style={'textAlign': 'center'}),
                     html.H2(f"{analise_descritiva['Valor Global Pendente (Bi)']:.3f}", className="card-text", style={'textAlign': 'center'}),
                 ], style={'textAlign': 'center'}),
-            ], color="info", inverse=True, style={'border-radius': '15px', 'height': '100%'}),
+            ], color="info", inverse=True, style={'border-radius': '15px', 'padding': '10px', 'height': '100%'}),
         ], width=2),
         
         dbc.Col([
@@ -186,7 +185,7 @@ app.layout = dbc.Container([
                     html.H5("Com Consumo Mínimo", className="card-title", style={'textAlign': 'center'}),
                     html.H2(f"{analise_descritiva['Contratos com Consumo Mínimo']}", className="card-text", style={'textAlign': 'center'}),
                 ], style={'textAlign': 'center'}),
-            ], color="info", inverse=True, style={'border-radius': '15px'}),
+            ], color="info", inverse=True, style={'border-radius': '15px', 'padding': '10px', 'height': '100%'}),
         ], width=2),
         
         dbc.Col([
@@ -195,7 +194,7 @@ app.layout = dbc.Container([
                     html.H5("Consumo Mínimo Atingido", className="card-title", style={'textAlign': 'center'}),
                     html.H2(f"{analise_descritiva['Consumo Mínimo Atingido']}", className="card-text", style={'textAlign': 'center'}),
                 ], style={'textAlign': 'center'}),
-            ], color="info", inverse=True, style={'border-radius': '15px'}),
+            ], color="info", inverse=True, style={'border-radius': '15px', 'padding': '10px', 'height': '100%'}),
         ], width=2),
         
         dbc.Col([
@@ -204,9 +203,9 @@ app.layout = dbc.Container([
                     html.H5("Materiais Sem Contrato", className="card-title", style={'textAlign': 'center'}),
                     html.H2(f"{analise_descritiva['Materiais Sem Contrato']}", className="card-text", style={'textAlign': 'center'}),
                 ], style={'textAlign': 'center'}),
-            ], color="info", inverse=True, style={'border-radius': '15px'}),
+            ], color="info", inverse=True, style={'border-radius': '15px', 'padding': '10px', 'height': '100%'}),
         ], width=2),
-    ], justify='center', className="mb-4"),
+    ], justify='center', className="mb-2", style={'margin-left': '0px', 'margin-right': '0px'}),  # Ajustamos as margens
     
     dbc.Row([
         dbc.Col([
