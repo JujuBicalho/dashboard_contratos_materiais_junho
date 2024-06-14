@@ -106,7 +106,7 @@ fig_consumo.update_traces(
     texttemplate='%{y}', 
     textposition='inside', 
     insidetextanchor='middle', 
-    textfont=dict(color='white', size=15, family='Arial', weight='bold'),
+    textfont=dict(color='white', size=25, family='Arial', weight='bold'),
     hovertemplate='<b>Consumo</b>: %{x}<br><b>Quantidade</b>: %{y}<extra></extra>'  
 ) 
    
@@ -116,7 +116,7 @@ fig_consumo.update_layout(
     yaxis_title=None, 
     plot_bgcolor='white', 
     paper_bgcolor='white', 
-    title_font=dict(size=30, family='Arial', color='#005a8d', weight='bold'),
+    title_font=dict(size=50, family='Arial', color='#005a8d', weight='bold'),
     title_x=0.5,
     xaxis=dict(tickfont=dict(size=15, family='Arial', color='black', weight='bold'))
 )

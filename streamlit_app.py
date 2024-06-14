@@ -18,6 +18,6 @@ import time
 time.sleep(5)
 
 # Mostrar o Dash no Streamlit
-components.iframe("http://127.0.0.1:8050", width='100%', height='100%', scrolling=False)
+components.iframe("http://127.0.0.1:8050", width='1200', height='800', scrolling=False)
 
 
