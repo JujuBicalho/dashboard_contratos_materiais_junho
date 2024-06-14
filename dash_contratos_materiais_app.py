@@ -63,7 +63,6 @@ total_contratos_minimo_atingido = contratos_minimo_atingido['Doc.compra'].nuniqu
 # Materiais sem contrato
 materiais_sem_contrato = demanda_spt_df[demanda_spt_df['Contrato Vigente'] == "Não"].shape[0]  
 
-
 # Filtrar os contratos por Farol SALDO
 contratos_abaixo_60 = analise_df[analise_df['Farol SALDO'].astype(float) < 0.6]['Doc.compra'].nunique()
 contratos_acima_60 = analise_df[(analise_df['Farol SALDO'].astype(float) >= 0.6) & (analise_df['Farol SALDO'].astype(float) < 0.8)]['Doc.compra'].nunique()
@@ -146,66 +145,67 @@ app.layout = dbc.Container([
         dbc.Col([
             dbc.Card([
                 dbc.CardBody([
-                    html.H5("Total de Contratos", className="card-title", style={'textAlign': 'center'}),
-                    html.H2(f"{analise_descritiva['Total de Contratos']}", className="card-text", style={'textAlign': 'center'}),
-                ], style={'textAlign': 'center'}),
-            ], color="info", inverse=True, style={'border-radius': '15px', 'padding': '10px'}),
-        ], width=1.5, style={'margin': '5px'}),
+                    html.H5("Total de Contratos", className="card-title", style={'textAlign': 'center', 'fontSize': '14px'}),
+                    html.H2(f"{analise_descritiva['Total de Contratos']}", className="card-text", style={'textAlign': 'center', 'fontSize': '24px'}),
+                ], style={'textAlign': 'center', 'padding': '10%'}),
+            ], color="info", inverse=True, style={'border-radius': '15px', 'height': '100px', 'width': '100px', 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'}),
+        ], width=1, style={'margin': '10px'}), 
+                  
+                 
+        dbc.Col([
+            dbc.Card([
+                dbc.CardBody([
+                    html.H5("Prox. Vencimento (6 meses)", className="card-title", style={'textAlign': 'center', 'fontSize': '14px', 'color': 'red'}),
+                    html.H2(f"{analise_descritiva['Contratos Prox. Vencimento']}", className="card-text", style={'textAlign': 'center', 'color': 'red','fontSize': '24px'}),
+                ], style={'textAlign': 'center', 'padding': '10px'}),
+            ], color="info", inverse=True, style={'border-radius': '15px', 'height': '100px', 'width': '100px', 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'}),
+        ], width=1, style={'margin': '10px'}),   
+                
+        dbc.Col([
+            dbc.Card([
+                dbc.CardBody([
+                    html.H5("Valor dos Contratos (Bi)", className="card-title", style={'textAlign': 'center', 'fontSize': '14px'}),
+                    html.H2(f"{analise_descritiva['Valor Total dos Contratos (Bi)']:.3f}", className="card-text", style={'textAlign': 'center', 'fontSize': '24px'}),
+                ], style={'textAlign': 'center', 'padding': '5px'}),
+            ], color="info", inverse=True, style={'border-radius': '15px', 'height': '100px', 'width': '100px', 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'}),
+        ], width=1, style={'margin': '10px'}),
         
         dbc.Col([
             dbc.Card([
                 dbc.CardBody([
-                    html.H5(["Prox. Vencimento (6 meses)"], className="card-title", style={'textAlign': 'center', 'color': 'red'}),
-                    html.H2(f"{analise_descritiva['Contratos Prox. Vencimento']}", className="card-text", style={'textAlign': 'center', 'color': 'red'}),
-                ], style={'textAlign': 'center'}),
-            ], color="info", inverse=True, style={'border-radius': '15px', 'padding': '10px'}),
-        ], width=1.5, style={'margin': '5px'}),      
+                    html.H5("Valor Global Pendente (Bi)", className="card-title", style={'textAlign': 'center', 'fontSize': '14px'}),
+                    html.H2(f"{analise_descritiva['Valor Global Pendente (Bi)']:.3f}", className="card-text", style={'textAlign': 'center','fontSize': '24px'}),
+                ], style={'textAlign': 'center', 'padding': '5px'}),
+            ], color="info", inverse=True, style={'border-radius': '15px', 'height': '100px', 'width': '100px', 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'}),
+        ], width=1, style={'margin': '10px'}),
         
         dbc.Col([
             dbc.Card([
                 dbc.CardBody([
-                    html.H5("Valor dos Contratos (Bi)", className="card-title", style={'textAlign': 'center'}),
-                    html.H2(f"{analise_descritiva['Valor Total dos Contratos (Bi)']:.3f}", className="card-text", style={'textAlign': 'center'}),
-                ], style={'textAlign': 'center'}),
-            ], color="info", inverse=True, style={'border-radius': '15px', 'padding': '10px'}),
-        ], width=1.5, style={'margin': '5px'}),
+                    html.H5("Com Consumo Mínimo", className="card-title", style={'textAlign': 'center', 'fontSize': '14px'}),
+                    html.H2(f"{analise_descritiva['Contratos com Consumo Mínimo']}", className="card-text", style={'textAlign': 'center','fontSize': '24px'}),
+                ], style={'textAlign': 'center', 'padding': '5px'}),
+            ], color="info", inverse=True, style={'border-radius': '15px', 'height': '100px', 'width': '100px', 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'}),
+        ], width=1, style={'margin': '10px'}),
         
         dbc.Col([
             dbc.Card([
                 dbc.CardBody([
-                    html.H5("Valor Global Pendente (Bi)", className="card-title", style={'textAlign': 'center'}),
-                    html.H2(f"{analise_descritiva['Valor Global Pendente (Bi)']:.3f}", className="card-text", style={'textAlign': 'center'}),
-                ], style={'textAlign': 'center'}),
-            ], color="info", inverse=True, style={'border-radius': '15px', 'padding': '10px'}),
-        ], width=1.5, style={'margin': '5px'}),
+                    html.H5("Consumo Mínimo Atingido", className="card-title", style={'textAlign': 'center', 'fontSize': '14px'}),
+                    html.H2(f"{analise_descritiva['Consumo Mínimo Atingido']}", className="card-text", style={'textAlign': 'center','fontSize': '24px'}),
+                ], style={'textAlign': 'center', 'padding': '5px'}),
+            ], color="info", inverse=True, style={'border-radius': '15px', 'height': '100px', 'width': '100px', 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'}),
+        ], width=1, style={'margin': '10px'}),
         
         dbc.Col([
             dbc.Card([
                 dbc.CardBody([
-                    html.H5("Com Consumo Mínimo", className="card-title", style={'textAlign': 'center'}),
-                    html.H2(f"{analise_descritiva['Contratos com Consumo Mínimo']}", className="card-text", style={'textAlign': 'center'}),
-                ], style={'textAlign': 'center'}),
-            ], color="info", inverse=True, style={'border-radius': '15px', 'padding': '10px'}),
-        ], width=1.5, style={'margin': '5px'}),
-        
-        dbc.Col([
-            dbc.Card([
-                dbc.CardBody([
-                    html.H5("Consumo Mínimo Atingido", className="card-title", style={'textAlign': 'center'}),
-                    html.H2(f"{analise_descritiva['Consumo Mínimo Atingido']}", className="card-text", style={'textAlign': 'center'}),
-                ], style={'textAlign': 'center'}),
-            ], color="info", inverse=True, style={'border-radius': '15px', 'padding': '10px'}),
-        ], width=1.5, style={'margin': '5px'}),
-        
-        dbc.Col([
-            dbc.Card([
-                dbc.CardBody([
-                    html.H5("Materiais Sem Contrato", className="card-title", style={'textAlign': 'center'}),
-                    html.H2(f"{analise_descritiva['Materiais Sem Contrato']}", className="card-text", style={'textAlign': 'center'}),
-                ], style={'textAlign': 'center'}),
-            ], color="info", inverse=True, style={'border-radius': '15px', 'padding': '10px'}),
-        ], width=1.5, style={'margin': '5px'}),
-    ], justify='center', className="mb-2", style={'margin-left': '0px', 'margin-right': '0px'}),  # Ajustamos as margens
+                    html.H5("Materiais Sem Contrato", className="card-title", style={'textAlign': 'center', 'fontSize': '14px'}),
+                    html.H2(f"{analise_descritiva['Materiais Sem Contrato']}", className="card-text", style={'textAlign': 'center','fontSize': '24px'}),
+                ], style={'textAlign': 'center', 'padding': '5px'}),
+            ], color="info", inverse=True, style={'border-radius': '15px', 'height': '100px', 'width': '100px', 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'}),
+        ], width=1, style={'margin': '10px'}),
+    ], justify='center', className="mb-2"),
     
     dbc.Row([
         dbc.Col([
