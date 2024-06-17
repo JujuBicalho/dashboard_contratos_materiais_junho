@@ -4,7 +4,6 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 from datetime import datetime, timedelta
 import plotly.express as px
-import openxyl
 
 # Carregar o arquivo Excel
 file_path = 'BASE BI CONTRATOS.xlsx'
