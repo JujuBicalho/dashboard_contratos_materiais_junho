@@ -34,14 +34,10 @@ data_atual = datetime.now()
 data_limite = data_atual + timedelta(days=180)
 
 # Filtrar contratos próximos ao vencimento de 6 meses
-contratos_prox_venc = analise_df[
-    analise_df['FimValid/'] <= data_limite
-]
+contratos_prox_venc = analise_df[analise_df['FimValid/'] <= data_limite]
 
 # Filtrar contratos com consumo mínimo definido
-contratos_com_minimo = contratos_df[
-    (contratos_df['Consumo Mínimo'].str.lower() == 'sim') | (contratos_df['Consumo Mínimo'] == 1)
-]
+contratos_com_minimo = contratos_df[(contratos_df['Consumo Mínimo'].str.lower() == 'sim') | (contratos_df['Consumo Mínimo'] == 1)]
 total_contratos_com_minimo = contratos_com_minimo['Doc.compra'].nunique()
 
 # Aplicar a lógica da fórmula DAX em Python diretamente nos contratos com consumo mínimo
@@ -61,7 +57,7 @@ contratos_minimo_atingido = contratos_df[
 total_contratos_minimo_atingido = contratos_minimo_atingido['Doc.compra'].nunique()
 
 # Materiais sem contrato
-materiais_sem_contrato = demanda_spt_df[demanda_spt_df['Contrato Vigente'] == "Não"].shape[0]  
+materiais_sem_contrato = demanda_spt_df[demanda_spt_df['Contrato Vigente'] == "Não"].shape[0]
 
 # Filtrar os contratos por Farol SALDO
 contratos_abaixo_60 = analise_df[analise_df['Farol SALDO'].astype(float) < 0.6]['Doc.compra'].nunique()
@@ -108,14 +104,14 @@ fig_consumo.update_traces(
     insidetextanchor='middle', 
     textfont=dict(color='white', size=15, family='Arial', weight='bold'),
     hovertemplate='<b>Consumo</b>: %{x}<br><b>Quantidade</b>: %{y}<extra></extra>'  
-) 
-   
+)
+
 fig_consumo.update_layout(
-    showlegend=False, 
-    xaxis_title=None, 
-    yaxis_title=None, 
-    plot_bgcolor='white', 
-    paper_bgcolor='white', 
+    showlegend=False,
+    xaxis_title=None,
+    yaxis_title=None,
+    plot_bgcolor='white',
+    paper_bgcolor='white',
     title_font=dict(size=30, family='Arial', color='#005a8d', weight='bold'),
     title_x=0.5,
     xaxis=dict(tickfont=dict(size=15, family='Arial', color='black', weight='bold'))
@@ -125,11 +121,24 @@ fig_consumo.update_xaxes(
     tickfont=dict(size=13, family='Arial', color='black', weight='bold')
 )
 
+# Data da última atualização
+data_ultima_atualizacao = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
 # Layout do aplicativo Dash
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 app.layout = dbc.Container([
-    html.Div([
+    dbc.Row([
+        dbc.Col([
+            html.H1("Para maiores informações veja pelo Power BI", style={'textAlign': 'center', 'marginTop': '10px', 'fontSize': '18px'}),
+        ], width=8, style={'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'}),
+        
+    dbc.Row([
+        dbc.Col([
+            dbc.Button("Clique aqui para ver o dashboard no Power BI", href="https://app.powerbi.com/links/i3E_cz8GVg?ctid=d539d4bf-5610-471a-afc2-1c76685cfefa&pbi_source=linkShare", color="primary", className="mt-3", target="_blank")
+        ], width={'size': 6, 'offset': 3}, style={'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'})
+    ], style={'marginBottom': '20px'}),    
+    
         html.H1("Análise Descritiva Contratos de Materiais - Junho 2024", style={
             'textAlign': 'center', 
             'color': '#005a8d',
@@ -138,8 +147,17 @@ app.layout = dbc.Container([
             'border-radius': '10px',
             'width': '100%',
             'fontSize': '24px'  
-        }),
-    ], style={'marginBottom': 'px', 'width': '100%', 'display': 'flex', 'justify-content': 'center'}),
+        }),html.Div([
+        dbc.Col([
+            html.P(f"Data da última atualização: {data_ultima_atualizacao}", style={
+                'textAlign': 'right',
+                'fontSize': '12px',
+                'color': '#888888',
+                'marginTop': '10px'
+            })
+        ], width=4, style={'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'})
+    ], style={'marginBottom': '20px'}),        
+    ], style={'marginBottom': '40px', 'width': '100%', 'display': 'flex', 'justify-content': 'center'}),
     
     dbc.Row([
         dbc.Col([
@@ -151,7 +169,6 @@ app.layout = dbc.Container([
             ], color="info", inverse=True, style={'border-radius': '15px', 'height': '100px', 'width': '100px', 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'}),
         ], width=1, style={'margin': '10px'}), 
                   
-                 
         dbc.Col([
             dbc.Card([
                 dbc.CardBody([
