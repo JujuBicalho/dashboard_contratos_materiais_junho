@@ -170,8 +170,8 @@ app.layout = dbc.Container([
         dbc.Col([
             dbc.Card([
                 dbc.CardBody([
-                    html.H5("Total de Contratos", className="card-title", style={'textAlign': 'center', 'fontSize': '14px'}),
-                    html.H2(f"{analise_descritiva['Total de Contratos']}", className="card-text", style={'textAlign': 'center', 'fontSize': '24px'}),
+                    html.H5("Total de Contratos", className="card-title", style={'textAlign': 'center', 'fontSize': '16px'}),
+                    html.H2(f"{analise_descritiva['Total de Contratos']}", className="card-text", style={'textAlign': 'center', 'fontSize': '28px', 'weight':'bold' }),
                 ], style={'textAlign': 'center', 'padding': '10%'}),
             ], color="info", inverse=True, style={'border-radius': '15px', 'height': '100px', 'width': '100px', 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'}),
         ], width=1, style={'margin': '10px'}), 
@@ -179,7 +179,7 @@ app.layout = dbc.Container([
         dbc.Col([
             dbc.Card([
                 dbc.CardBody([
-                    html.H5("Prox. Vencimento (6 meses)", className="card-title", style={'textAlign': 'center', 'fontSize': '14px', 'color': 'red'}),
+                    html.H5("Prox. Vencimento (6 meses)", className="card-title", style={'textAlign': 'center', 'fontSize': '14px', 'color': 'red','weight':'bold' }),
                     html.H2(f"{analise_descritiva['Contratos Prox. Vencimento']}", className="card-text", style={'textAlign': 'center', 'color': 'red','fontSize': '24px'}),
                 ], style={'textAlign': 'center', 'padding': '10px'}),
             ], color="info", inverse=True, style={'border-radius': '15px', 'height': '100px', 'width': '100px', 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'}),
@@ -188,7 +188,7 @@ app.layout = dbc.Container([
         dbc.Col([
             dbc.Card([
                 dbc.CardBody([
-                    html.H5("Valor dos Contratos (Bi)", className="card-title", style={'textAlign': 'center', 'fontSize': '14px'}),
+                    html.H5("Valor dos Contratos (Bi)" ,className="card-title", style={'textAlign': 'center', 'fontSize': '16px', 'weight':'bold' }),
                     html.H2(f"{analise_descritiva['Valor Total dos Contratos (Bi)']:.3f}", className="card-text", style={'textAlign': 'center', 'fontSize': '24px'}),
                 ], style={'textAlign': 'center', 'padding': '5px'}),
             ], color="info", inverse=True, style={'border-radius': '15px', 'height': '100px', 'width': '100px', 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'}),
@@ -197,7 +197,7 @@ app.layout = dbc.Container([
         dbc.Col([
             dbc.Card([
                 dbc.CardBody([
-                    html.H5("Valor Global Pendente (Bi)", className="card-title", style={'textAlign': 'center', 'fontSize': '14px'}),
+                    html.H5("Valor Global Pendente (Bi)", className="card-title", style={'textAlign': 'center', 'fontSize': '16px', 'weight':'bold' }),
                     html.H2(f"{analise_descritiva['Valor Global Pendente (Bi)']:.3f}", className="card-text", style={'textAlign': 'center','fontSize': '24px'}),
                 ], style={'textAlign': 'center', 'padding': '5px'}),
             ], color="info", inverse=True, style={'border-radius': '15px', 'height': '100px', 'width': '100px', 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'}),
@@ -206,7 +206,7 @@ app.layout = dbc.Container([
         dbc.Col([
             dbc.Card([
                 dbc.CardBody([
-                    html.H5("Com Consumo Mínimo", className="card-title", style={'textAlign': 'center', 'fontSize': '14px'}),
+                    html.H5("Com Consumo Mínimo", className="card-title", style={'textAlign': 'center', 'fontSize': '16px', 'weight':'bold' }),
                     html.H2(f"{analise_descritiva['Contratos com Consumo Mínimo']}", className="card-text", style={'textAlign': 'center','fontSize': '24px'}),
                 ], style={'textAlign': 'center', 'padding': '5px'}),
             ], color="info", inverse=True, style={'border-radius': '15px', 'height': '100px', 'width': '100px', 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'}),
@@ -215,7 +215,7 @@ app.layout = dbc.Container([
         dbc.Col([
             dbc.Card([
                 dbc.CardBody([
-                    html.H5("Consumo Mínimo Atingido", className="card-title", style={'textAlign': 'center', 'fontSize': '14px'}),
+                    html.H5("Consumo Mínimo Atingido", className="card-title", style={'textAlign': 'center', 'fontSize': '16px', 'weight':'bold' }),
                     html.H2(f"{analise_descritiva['Consumo Mínimo Atingido']}", className="card-text", style={'textAlign': 'center','fontSize': '24px'}),
                 ], style={'textAlign': 'center', 'padding': '5px'}),
             ], color="info", inverse=True, style={'border-radius': '15px', 'height': '100px', 'width': '100px', 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'}),
@@ -224,7 +224,7 @@ app.layout = dbc.Container([
         dbc.Col([
             dbc.Card([
                 dbc.CardBody([
-                    html.H5("Materiais Sem Contrato", className="card-title", style={'textAlign': 'center', 'fontSize': '14px'}),
+                    html.H5("Materiais Sem Contrato", className="card-title", style={'textAlign': 'center', 'fontSize': '18px', 'weight':'bold' }),
                     html.H2(f"{analise_descritiva['Materiais Sem Contrato']}", className="card-text", style={'textAlign': 'center','fontSize': '24px'}),
                 ], style={'textAlign': 'center', 'padding': '5px'}),
             ], color="info", inverse=True, style={'border-radius': '15px', 'height': '100px', 'width': '100px', 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'}),
